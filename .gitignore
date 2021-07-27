@@ -1,0 +1,23 @@
+/.vscode
+__pycache__
+*.png
+/logs/*
+leveldb/*
+!leveldb
+test/*
+!test
+.env*
+config.yml
+*.bat
+/.git
+*.token
+*.exe
+qrcode.png
+/test.py
+# /data/images/jdzj_jb/role/*.png
+/data/leveldb/*
+/data/videos/*
+/data/voices/*
+/data/json/*
+/data/cache/*
+demo.py
