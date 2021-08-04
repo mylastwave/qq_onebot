@@ -21,3 +21,5 @@ qrcode.png
 /data/json/*
 /data/cache/*
 demo.py
+!data/images/jdzj_jb/zm_bj/*.png
+/device.json
