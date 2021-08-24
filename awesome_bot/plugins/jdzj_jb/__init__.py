@@ -4,7 +4,7 @@ from nonebot.rule import to_me
 from nonebot.adapters import Bot, Event
 from nonebot.typing import T_State
 from nonebot.adapters.cqhttp.message import MessageSegment
-from .script import ROLE_PATH, role_img_prod, gacha_pic
+from .script import role_img_prod, gacha_pic
 import os
 import random
 from .config import Config as JdzjJbConfig

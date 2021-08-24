@@ -1,9 +1,8 @@
-from asyncio.runners import run
-import re
 import pymongo
 import json
 import asyncio
 import os
+from .script import role_info_spider
 
 # BOT_PATH = os.path.dirname(__file__)
 BOT_PATH = os.getcwd()
@@ -27,6 +26,8 @@ def update_role_info_to_db():
     myclient = pymongo.MongoClient('mongodb://localhost:27017/')
     jb_db = myclient["jdzj_jb"]
     jb_col = jb_db["role_info"]
+    if not os.path.exists(BOT_PATH + JSON_PATH + "role_info.json"):
+        asyncio.run(role_info_spider())
     with open(BOT_PATH + JSON_PATH + "role_info.json", encoding="utf-8") as f:
         role_info_str = f.read()
     role_info_list = json.loads(role_info_str)
