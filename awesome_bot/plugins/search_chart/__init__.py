@@ -133,7 +133,7 @@ async def search_chart_handle2(bot: Bot, event: Event, state: T_State):
                     ext_url = results['results'][0]['data']['ext_urls'][0]
                     await bot.send(
                         event, message=Message(
-                            f"平台: {service_name}\n相似度: {similarity}\n作者: {menber_name}\n地址: {ext_url}\n") + 
+                            f"数据来源: {service_name}\n相似度: {similarity}\n作者: {menber_name}\n地址: {ext_url}\n") + 
                             MessageSegment.image(file=thumbnail))
                 elif index_id == 8:
                     #8->nico nico seiga
@@ -159,15 +159,24 @@ async def search_chart_handle2(bot: Bot, event: Event, state: T_State):
                     illust_id=results['results'][0]['data']['da_id']
                     await search_chart.finish(f"识图结果为<{service_name}>，请将样例提供给开发者进行完善")
                 elif index_id == 12:
-                    service_name = "twitter"
-                    source: str = results['results'][0]['data']['source']
+                    index_name: str = results['results'][0]['header']['index_name']
                     thumbnail = results['results'][0]['header']['thumbnail']
-                    split_list = source.replace("https://twitter.com/", "").split("/")
-                    author = split_list[0]
-                    await bot.send(
-                        event, message=Message(
-                            f"平台: {service_name}\n相似度: {similarity}\n作者: {author}\n地址: {source}\n") + 
-                            MessageSegment.image(file=thumbnail))
+                    if "yande.re" in index_name.lower():
+                        service_name = "yande.re"
+                        source: str = results['results'][0]['data']['source']
+                        creator = results['results'][0]['data']['creator']
+                        await bot.send(
+                            event, message=Message(
+                                f"数据来源: {service_name}\n相似度: {similarity}\n作者: {creator}\n地址: {source}\n") + 
+                                MessageSegment.image(file=thumbnail))
+                    elif "twitter" in index_name.lower():
+                        source: str = results['results'][0]['data']['source']
+                        split_list = source.replace("https://twitter.com/", "").split("/")
+                        author = split_list[0]
+                        await bot.send(
+                            event, message=Message(
+                                f"数据来源: {service_name}\n相似度: {similarity}\n作者: {author}\n地址: {source}\n") + 
+                                MessageSegment.image(file=thumbnail))
                 else:
                     #unknown
                     # print('Unhandled Index! Exiting...')

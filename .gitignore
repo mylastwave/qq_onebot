@@ -24,3 +24,4 @@ demo.py
 !data/images/jdzj_jb/zm_bj/*.png
 /device.json
 /result.json
+/nohup.out
